@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".HotelSaleActivity"/>
+        <activity android:name=".HotelInfoActivity"/>
     </application>
 
 </manifest>

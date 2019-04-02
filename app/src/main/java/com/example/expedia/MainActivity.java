@@ -1,5 +1,6 @@
 package com.example.expedia;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
         hotelSalebtn = findViewById(R.id.hotel_sale_btn);
         dailySalebtn = findViewById(R.id.daily_sale_btn);
         deadlineSalebtn = findViewById(R.id.deadline_sale_btn);
+
+        hotelSalebtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(MainActivity.this, HotelSaleActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

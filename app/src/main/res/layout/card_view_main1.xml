@@ -18,10 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="150dp">
             <ImageView
+                android:id="@+id/hotel_sale_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/hotel_image"/>
             <TextView
+                android:id="@+id/hotel_sale_percent"
                 android:layout_width="30dp"
                 android:layout_height="20dp"
                 android:background="@color/colorPrimaryDark"
@@ -34,6 +36,7 @@
                 android:layout_marginEnd="10dp"/>
         </FrameLayout>
         <TextView
+            android:id="@+id/hotel_sale_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="서귀포 칼 호텔"
@@ -42,6 +45,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"/>
         <TextView
+            android:id="@+id/hotel_sale_loc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="서귀포, 한국"
@@ -54,6 +58,7 @@
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="10dp">
             <TextView
+                android:id="@+id/hotel_sale_date"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="wrap_content"
@@ -62,6 +67,7 @@
                 android:textColor="#0000AA"
                 android:textSize="15dp"/>
             <TextView
+                android:id="@+id/hotel_sale_price"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="wrap_content"
