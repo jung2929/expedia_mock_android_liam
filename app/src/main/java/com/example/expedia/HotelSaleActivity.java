@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class HotelSaleActivity extends AppCompatActivity {
         hotelSaleArrayList = new ArrayList<>();
 
         for(int i=0;i<6;i++){
-            Drawable hotel_image = getResources().getDrawable(R.drawable.hotel_image);
+            Drawable hotel_image = getResources().getDrawable(R.drawable.hotel_image0);
             hotelSaleArrayList.add(new HotelSaleRecyclerView(hotel_image, "-" + String.valueOf(i*15)+"%", "Hotel Example",
                     "Hotel Location Example", "Example Date1 ~ Example Date2", "\\" + String.valueOf(i*19280)));
         }

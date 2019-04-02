@@ -21,7 +21,8 @@
                 android:id="@+id/hotel_sale_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/hotel_image"/>
+                android:src="@drawable/hotel_image0"
+                android:scaleType="centerCrop"/>
             <TextView
                 android:id="@+id/hotel_sale_percent"
                 android:layout_width="30dp"

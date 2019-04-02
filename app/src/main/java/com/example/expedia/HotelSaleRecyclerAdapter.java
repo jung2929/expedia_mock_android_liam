@@ -2,6 +2,7 @@ package com.example.expedia;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,13 +27,13 @@ public class HotelSaleRecyclerAdapter extends RecyclerView.Adapter<HotelSaleRecy
 
         public HotelSaleViewHolder(@NonNull View view) {
             super(view);
-            final View mView = view;
             this.hotel_sale_image = view.findViewById(R.id.hotel_sale_image);
             this.hotel_sale_percent = view.findViewById(R.id.hotel_sale_percent);
             this.hotel_sale_name = view.findViewById(R.id.hotel_sale_name);
             this.hotel_sale_loc = view.findViewById(R.id.hotel_sale_loc);
             this.hotel_sale_date = view.findViewById(R.id.hotel_sale_date);
             this.hotel_sale_price = view.findViewById(R.id.hotel_sale_price);
+            final View mView = view;
         }
     }
     public HotelSaleRecyclerAdapter(ArrayList<HotelSaleRecyclerView> list){
@@ -51,7 +52,12 @@ public class HotelSaleRecyclerAdapter extends RecyclerView.Adapter<HotelSaleRecy
 
     @Override
     public void onBindViewHolder(@NonNull HotelSaleViewHolder viewHolder, int position) {
-        HotelSaleRecyclerView item = mList.get(position);
+        viewHolder.hotel_sale_image.setImageDrawable(mList.get(position).getHotel_sale_image());
+        viewHolder.hotel_sale_percent.setText(mList.get(position).getHotel_sale_percent());
+        viewHolder.hotel_sale_name.setText(mList.get(position).getHotel_sale_name());
+        viewHolder.hotel_sale_loc.setText(mList.get(position).getHotel_sale_loc());
+        viewHolder.hotel_sale_date.setText(mList.get(position).getHotel_sale_date());
+        viewHolder.hotel_sale_price.setText(mList.get(position).getHotel_sale_price());
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
