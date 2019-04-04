@@ -13,7 +13,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB6WHt_oQNHgZqOT1artEjyPkBKc97Nz_A"/>
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <activity android:name=".StartActivity">
+        <activity android:name=".StartActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
