@@ -31,7 +31,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="10dp">
                 <TextView
-                    android:id="@+id/hotel_sale_percent"
+                    android:id="@+id/hotel_search_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
@@ -40,6 +40,7 @@
                     android:layout_gravity="start|bottom"
                     android:gravity="center" />
                 <TextView
+                    android:id="@+id/hotel_search_loc_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="강남"
