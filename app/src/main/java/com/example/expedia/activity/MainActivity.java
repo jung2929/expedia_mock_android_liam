@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private Button hotelReservebtn;
-    private ImageButton btnDaily;
+    private ImageButton btnDeadline;
     private Button hotelAndPlaneReservebtn;
     private TextView tvLogin;
 
@@ -53,16 +53,17 @@ public class MainActivity extends AppCompatActivity {
         mainAdapter = new MainRecyclerAdapter(mainArrayList);
         mainRecyclerView.setAdapter(mainAdapter);
 
-        btnDaily = findViewById(R.id.btnDaily);
+        btnDeadline = findViewById(R.id.btnDeadline);
 
         hotelReservebtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(intent);
+
             }
         });
-        btnDaily.setOnClickListener(new View.OnClickListener(){
+        btnDeadline.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(MainActivity.this, HotelSaleActivity.class);

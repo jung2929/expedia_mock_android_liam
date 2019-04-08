@@ -11,12 +11,14 @@
         android:layout_height="50dp"
         android:orientation="horizontal">
         <ImageButton
+            android:id="@+id/btnLoginExit"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/exitbutton"/>
         <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayoutLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:tabSelectedTextColor="#0000AA"
@@ -31,71 +33,9 @@
                 android:text="회원가입"/>
         </android.support.design.widget.TabLayout>
     </LinearLayout>
-    <android.support.v7.widget.CardView
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpLogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_marginTop="10dp"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="2dp"
-        android:layout_marginHorizontal="10dp"
-        android:padding="5dp"
-        card_view:cardBackgroundColor="#ffffff">
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#000000"
-            android:textColorHint="#eeeeee"
-            android:hint="이메일 주소"/>
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_marginTop="10dp"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="2dp"
-        android:layout_marginHorizontal="10dp"
-        android:padding="5dp"
-        card_view:cardBackgroundColor="#ffffff">
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#000000"
-            android:textColorHint="#eeeeee"
-            android:hint="비밀번호"/>
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_marginTop="10dp"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="2dp"
-        android:layout_marginHorizontal="10dp"
-        card_view:cardBackgroundColor="#0000AA">
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#ffffff"
-            android:background="#0000AA"
-            android:text="로그인"/>
-    </android.support.v7.widget.CardView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="비밀번호를 잊으셨나요?"
-        android:layout_gravity="center_horizontal"
-        android:textSize="12dp"
-        android:textColor="#000AAA"/>
+        android:layout_height="wrap_content">
+    </android.support.v4.view.ViewPager>
 </LinearLayout>

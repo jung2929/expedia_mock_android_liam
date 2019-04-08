@@ -17,7 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -114,9 +115,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:scaleType="centerCrop"
+                                android:background="@drawable/common_google_signin_btn_icon_dark"
+                                android:layout_gravity="center_horizontal"/>
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_marginTop="5dp"
                                 android:text="Expedia 회원으로 예약!"
                                 android:textSize="15dp"
                                 android:textColor="#0000AA"
@@ -198,7 +206,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageButton
-                        android:id="@+id/btnDaily"
+                        android:id="@+id/btnDeadline"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/hotel_image3"/>

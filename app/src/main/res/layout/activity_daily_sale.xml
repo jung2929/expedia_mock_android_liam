@@ -30,42 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:gravity="center"
-                android:text="일일 특가"
-                android:textColor="#0000AA"
-                android:textSize="18dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:gravity="center"
-                android:text="일일 특가 상품"
-                android:textColor="#0000AA"
-                android:textSize="25dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:gravity="center"
-                android:paddingHorizontal="50dp"
-                android:paddingTop="15dp"
-                android:text="매일 일부 호텔을 40% 이상 할인해 드려요. 본 특가 상품은 매일 밤 자정 변경되니 마음에 드는 호텔을 발견하시면 서둘러 예약해 주세요!"
-                android:textColor="#0000AA"
-                android:textSize="15dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:gravity="center"
-                android:paddingHorizontal="40dp"
-                android:paddingBottom="25dp"
-                android:text="이용약관"
-                android:textColor="#0000AA"
-                android:textSize="15dp"/>
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
