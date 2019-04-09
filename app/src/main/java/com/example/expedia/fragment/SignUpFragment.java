@@ -1,6 +1,8 @@
 package com.example.expedia.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -76,18 +78,24 @@ public class SignUpFragment extends Fragment {
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             final String responseData = response.body().string();
-            if(responseData.contains("500")){
-                Toast.makeText(getContext(), "빈 칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
-            }
-            else if(responseData.contains("501")){
-                Toast.makeText(getContext(), "잘못된 이메일 형식입니다.", Toast.LENGTH_SHORT).show();
-            }
-            else if(responseData.contains("502")){
-                Toast.makeText(getContext(), "이미 존재하는 회원입니다.", Toast.LENGTH_SHORT).show();
-            }
-            else if(responseData.contains("100")){
-                Toast.makeText(getContext(), "회원가입에 성공하였습니다!", Toast.LENGTH_SHORT).show();
-            }
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(new Runnable(){
+                @Override
+                public void run(){
+                    if(responseData.contains("500")){
+                        Toast.makeText(getContext(), "빈 칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(responseData.contains("501")){
+                        Toast.makeText(getContext(), "잘못된 이메일 형식입니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(responseData.contains("502")){
+                        Toast.makeText(getContext(), "이미 존재하는 회원입니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(responseData.contains("100")){
+                        Toast.makeText(getContext(), "회원가입에 성공하였습니다!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            },0);
             Log.e("Success", "responseData : " + responseData);
         }
     };

@@ -30,15 +30,15 @@
                 android:id="@+id/main_tx1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="\80,000이하 특가 호텔"
-                android:textSize="30dp"
+                android:text="￦80,000이하 특가 호텔"
+                android:textSize="25dp"
                 android:textColor="#ffffff"/>
             <TextView
                 android:id="@+id/main_tx2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="호텔이 1박에 \80,000이하!"
-                android:textSize="15dp"
+                android:text="호텔이 1박에 ￦80,000이하!"
+                android:textSize="13dp"
                 android:textColor="#ffffff"/>
         </LinearLayout>
     </FrameLayout>

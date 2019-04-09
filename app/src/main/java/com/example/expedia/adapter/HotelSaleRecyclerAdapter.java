@@ -54,7 +54,7 @@ public class HotelSaleRecyclerAdapter extends RecyclerView.Adapter<HotelSaleRecy
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HotelSaleViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull final HotelSaleViewHolder viewHolder, int position) {
         viewHolder.hotel_sale_image.setImageDrawable(mList.get(position).getHotel_sale_image());
         viewHolder.hotel_sale_percent.setText(mList.get(position).getHotel_sale_percent());
         viewHolder.hotel_sale_name.setText(mList.get(position).getHotel_sale_name());
@@ -67,6 +67,11 @@ public class HotelSaleRecyclerAdapter extends RecyclerView.Adapter<HotelSaleRecy
             public void onClick(View view){
                 Context context = view.getContext();
                 Intent intent = new Intent(context, HotelInfoActivity.class);
+                intent.putExtra("hotelName", viewHolder.hotel_sale_name.getText().toString());
+                intent.putExtra("hotelPercentage", viewHolder.hotel_sale_percent.getText().toString());
+                intent.putExtra("hotelLoc", viewHolder.hotel_sale_loc.getText().toString());
+                intent.putExtra("hotelDate", viewHolder.hotel_sale_date.getText().toString());
+                intent.putExtra("hotelPrice", viewHolder.hotel_sale_price.getText().toString());
                 context.startActivity(intent);
             }
         });

@@ -2,6 +2,7 @@ package com.example.expedia.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,16 +15,22 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.expedia.adapter.HotelSaleRecyclerAdapter;
+import com.example.expedia.entities.HotelSaleData;
 import com.example.expedia.entities.HotelSaleRecyclerViewItem;
 import com.example.expedia.R;
 import com.example.expedia.fragment.DailySaleFragment;
 import com.example.expedia.fragment.HotelSaleFragment;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -69,14 +76,8 @@ public class HotelSaleActivity extends AppCompatActivity {
 
         hotelSaleArrayList = new ArrayList<>();
 
-        for(int i=0;i<6;i++){
-            Drawable hotel_image = getResources().getDrawable(R.drawable.hotel_image0);
-            hotelSaleArrayList.add(new HotelSaleRecyclerViewItem(hotel_image, "-" + String.valueOf(i*15)+"%", "Hotel Example",
-                    "Hotel Location Example", "Example Date1 ~ Example Date2", "\\" + String.valueOf(i*19280)));
-        }
-
-        hotelSaleAdapter = new HotelSaleRecyclerAdapter(hotelSaleArrayList);
-        hotelRecyclerView.setAdapter(hotelSaleAdapter);
+        hotelListAsyncTask mAsyncTask = new hotelListAsyncTask();
+        mAsyncTask.execute();
 
         exitButton = findViewById(R.id.hotel_sale_exitButton);
         exitButton.setOnClickListener(new View.OnClickListener(){
@@ -86,31 +87,52 @@ public class HotelSaleActivity extends AppCompatActivity {
             }
         });
     }
-    public void getHotelList(int position){
+    public class hotelListAsyncTask extends AsyncTask<String, Void, Response>{
+
         OkHttpClient client = new OkHttpClient();
-        String url;
-        if(position == 0){
-            url = "http://www.kaca5.com/expedia/discounted_80000";
-        }
-        else if(position == 1){
-            url = "http://www.kaca5.com/expedia/discounted_today";
-        }
-        else{
-            url = "http://www.kaca5.com/expedia/discounted_fin";
-        }
-        Request request = new Request.Builder().url(url).build();
-        client.newCall(request).enqueue(hotelListCallback);
-    }
-    private Callback hotelListCallback = new Callback() {
-        @Override
-        public void onFailure(Call call, IOException e) {
-            Log.e("Error", "Message : " + e.getMessage());
-        }
 
         @Override
-        public void onResponse(Call call, Response response) throws IOException {
-            final String responseData = response.body().string();
-            Log.e("Success", "responseData : " + responseData);
+        protected Response doInBackground(String... strings) {
+            String url;
+            if(listType==0){
+                url = "http://www.kaca5.com/expedia/discounted_80000";
+            }
+            else if(listType==1){
+                url = "http://www.kaca5.com/expedia/discounted_today";
+            }
+            else{
+                url = "http://www.kaca5.com/expedia/discounted_fin";
+            }
+            Request request = new Request.Builder().url(url).build();
+            try {
+                Response response = client.newCall(request).execute();
+
+                return response;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
-    };
+        @Override
+        protected void onPostExecute(Response response){
+            super.onPostExecute(response);
+            Gson gson = new GsonBuilder().create();
+            JsonParser parser = new JsonParser();
+            JsonElement rootObject = parser.parse(response.body().charStream())
+                    .getAsJsonObject().get("result");
+
+            Log.e("JSONDATA : ", String.valueOf(rootObject));
+
+            HotelSaleData[] result = gson.fromJson(rootObject, HotelSaleData[].class);
+            for(HotelSaleData data : result){
+                Drawable hotel_image = getResources().getDrawable(R.drawable.hotel_image0);
+                hotelSaleArrayList.add(new HotelSaleRecyclerViewItem(hotel_image, "-" + String.valueOf(data.getPercentage())+"%",
+                        String.valueOf(data.getName()), String.valueOf(data.getShortL()),
+                        String.valueOf(data.getSdate()) + " ~ " + String.valueOf(data.getEdate()),
+                        "￦" + String.valueOf(data.getPriced())));
+            }
+            hotelSaleAdapter = new HotelSaleRecyclerAdapter(hotelSaleArrayList);
+            hotelRecyclerView.setAdapter(hotelSaleAdapter);
+        }
+    }
 }

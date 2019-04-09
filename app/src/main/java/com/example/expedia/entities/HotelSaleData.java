@@ -1,58 +1,34 @@
 package com.example.expedia.entities;
 
 public class HotelSaleData {
-    private String name;
-    private String shortL;
-    private String salePercentage;
-    private String sDate;
-    private String eDate;
-    private String priced;
+    private String Name;
+    private String ShortL;
+    private String Percentage;
+    private String Sdate;
+    private String Edate;
+    private String Priced;
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return Name;
     }
 
     public String getShortL() {
-        return shortL;
+        return ShortL;
     }
 
-    public void setShortL(String shortL) {
-        this.shortL = shortL;
+    public String getPercentage() {
+        return Percentage;
     }
 
-    public String getSalePercentage() {
-        return salePercentage;
+    public String getSdate() {
+        return Sdate;
     }
 
-    public void setSalePercentage(String salePercentage) {
-        this.salePercentage = salePercentage;
-    }
-
-    public String getsDate() {
-        return sDate;
-    }
-
-    public void setsDate(String sDate) {
-        this.sDate = sDate;
-    }
-
-    public String geteDate() {
-        return eDate;
-    }
-
-    public void seteDate(String eDate) {
-        this.eDate = eDate;
+    public String getEdate() {
+        return Edate;
     }
 
     public String getPriced() {
-        return priced;
-    }
-
-    public void setPriced(String priced) {
-        this.priced = priced;
+        return Priced;
     }
 }

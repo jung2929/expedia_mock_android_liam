@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.expedia.adapter.HotelInfoViewPagerAdapter;
 import com.example.expedia.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,6 +25,8 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
     private TextView hotelInfoName;
     private TextView hotelInfoDate;
     private TextView hotelInfoPerson;
+    private TextView hotelInfoPrice;
+    private TextView hotelInfoPercentage;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -31,10 +34,11 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotel_info);
 
+        Intent intent = getIntent();
+
         ViewPager viewPager = findViewById(R.id.hotel_info_image_viewPager);
         HotelInfoViewPagerAdapter viewPagerAdapter = new HotelInfoViewPagerAdapter(HotelInfoActivity.this);
         viewPager.setAdapter(viewPagerAdapter);
-
 
         viewPagerAdapter.addItem(getResources().getDrawable(R.drawable.hotel_image0));
         viewPagerAdapter.addItem(getResources().getDrawable(R.drawable.hotel_image1));
@@ -47,8 +51,15 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
 
         hotelInfoName = findViewById(R.id.hotel_info_name);
         hotelInfoDate = findViewById(R.id.hotel_info_date);
+        hotelInfoPrice = findViewById(R.id.hotel_info_price);
+        hotelInfoPercentage = findViewById(R.id.hotel_info_percentage);
         hotelInfoPerson = findViewById(R.id.hotel_info_person);
         backButton = findViewById(R.id.backButton);
+
+        hotelInfoName.setText(intent.getStringExtra("hotelName"));
+        hotelInfoDate.setText(intent.getStringExtra("hotelDate"));
+        hotelInfoPrice.setText(intent.getStringExtra("hotelPrice") + "/1박");
+        hotelInfoPercentage.setText(intent.getStringExtra("hotelPercentage"));
 
         backButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -72,6 +83,7 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
         markerOptions.position(SEOUL);
         markerOptions.title("서울");
         googleMap.addMarker(markerOptions);
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(6));
     }
     @Override
     public void onBackPressed(){
