@@ -45,11 +45,25 @@
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="70dp">
+
+                    <TextView
+                        android:id="@+id/hotel_info_loc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="#0000AA"
+                        android:textSize="14dp"
+                        android:layout_marginStart="20dp"
+                        app:layout_constraintBottom_toTopOf="@id/hotel_info_price"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        tools:text="한국 서울" />
                     <TextView
                         android:id="@+id/hotel_info_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/hotel_info_loc"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:gravity="center"

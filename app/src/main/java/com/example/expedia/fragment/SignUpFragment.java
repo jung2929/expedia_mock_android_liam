@@ -17,10 +17,14 @@ import android.widget.Toast;
 import com.example.expedia.R;
 import com.example.expedia.activity.LoginActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -58,11 +62,15 @@ public class SignUpFragment extends Fragment {
     }
     public void signUp(String url, String email, String pw, String name){
         OkHttpClient client = new OkHttpClient();
-        RequestBody postBody = new FormBody.Builder()
-                .add("Email", email)
-                .add("Pw", pw)
-                .add("Name", name)
-                .build();
+        JSONObject loginInput = new JSONObject();
+        try {
+            loginInput.put("Email", email).put("Pw", pw).put("Name", name);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody postBody = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                loginInput.toString());
         Request request = new Request.Builder().addHeader("Content-Type", "application/json")
                 .url(url).post(postBody).build();
 

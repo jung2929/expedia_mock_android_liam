@@ -3,9 +3,12 @@ package com.example.expedia.activity;
 import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -19,14 +22,19 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.List;
+
 public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private ImageButton backButton;
+    private Geocoder geocoder;
     private TextView hotelInfoName;
     private TextView hotelInfoDate;
     private TextView hotelInfoPerson;
     private TextView hotelInfoPrice;
     private TextView hotelInfoPercentage;
+    private TextView hotelInfoLoc;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -45,12 +53,9 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
         viewPagerAdapter.addItem(getResources().getDrawable(R.drawable.hotel_image2));
         viewPagerAdapter.addItem(getResources().getDrawable(R.drawable.hotel_image3));
 
-        FragmentManager fragmentManager = getFragmentManager();
-        MapFragment fragment = (MapFragment) fragmentManager.findFragmentById(R.id.hotel_info_map);
-        fragment.getMapAsync(this);
-
         hotelInfoName = findViewById(R.id.hotel_info_name);
         hotelInfoDate = findViewById(R.id.hotel_info_date);
+        hotelInfoLoc = findViewById(R.id.hotel_info_loc);
         hotelInfoPrice = findViewById(R.id.hotel_info_price);
         hotelInfoPercentage = findViewById(R.id.hotel_info_percentage);
         hotelInfoPerson = findViewById(R.id.hotel_info_person);
@@ -58,16 +63,20 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
 
         hotelInfoName.setText(intent.getStringExtra("hotelName"));
         hotelInfoDate.setText(intent.getStringExtra("hotelDate"));
+        hotelInfoLoc.setText(intent.getStringExtra("hotelLoc"));
         hotelInfoPrice.setText(intent.getStringExtra("hotelPrice") + "/1박");
         hotelInfoPercentage.setText(intent.getStringExtra("hotelPercentage"));
+
+        FragmentManager fragmentManager = getFragmentManager();
+        MapFragment mapfragment = (MapFragment) fragmentManager.findFragmentById(R.id.hotel_info_map);
+        mapfragment.getMapAsync(this);
 
         backButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(HotelInfoActivity.this, SearchActivity.class) ;
-                intent.putExtra("hotel_name", hotelInfoName.getText().toString());
-                intent.putExtra("hotel_date", hotelInfoDate.getText().toString());
-                intent.putExtra("hotel_person", hotelInfoPerson.getText().toString());
+                intent.putExtra("hotelName", hotelInfoName.getText().toString());
+                intent.putExtra("hotelDate", hotelInfoDate.getText().toString());
                 finish();
                 startActivity(intent);
             }
@@ -76,21 +85,42 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        LatLng SEOUL = new LatLng(37.56, 126.97);
+    public void onMapReady(final GoogleMap googleMap) {
+        geocoder = new Geocoder(this);
 
+        String hotelLoc = hotelInfoLoc.getText().toString();
+        List<Address> addressList = null;
+        try {
+            addressList = geocoder.getFromLocationName(hotelLoc, 3);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String[] splitLoc = addressList.get(0).toString().split(",");
+        String address = splitLoc[0].substring(splitLoc[0].indexOf("\"")+1, splitLoc[0].length()-2);
+        String lat = splitLoc[10].substring(splitLoc[10].indexOf("=")+1);
+        String lng = splitLoc[12].substring(splitLoc[12].indexOf("=")+1);
+
+        LatLng point = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(SEOUL);
-        markerOptions.title("서울");
+        markerOptions.title(hotelInfoName.getText().toString());
+        markerOptions.snippet(address);
+        markerOptions.position(point);
+
         googleMap.addMarker(markerOptions);
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(6));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 15));
+
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                //
+            }
+        });
     }
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(HotelInfoActivity.this, SearchActivity.class) ;
-        intent.putExtra("hotel_name", hotelInfoName.getText().toString());
-        intent.putExtra("hotel_date", hotelInfoDate.getText().toString());
-        intent.putExtra("hotel_person", hotelInfoPerson.getText().toString());
+        intent.putExtra("hotelName", hotelInfoName.getText().toString());
+        intent.putExtra("hotelDate", hotelInfoDate.getText().toString());
         finish();
         startActivity(intent);
     }

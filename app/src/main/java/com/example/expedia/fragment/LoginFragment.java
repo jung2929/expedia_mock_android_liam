@@ -17,10 +17,14 @@ import android.widget.Toast;
 import com.example.expedia.R;
 import com.example.expedia.activity.LoginActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -50,21 +54,27 @@ public class LoginFragment extends Fragment {
 
                 new Thread(){
                     public void run(){
-                        login("http://www.kaca5.com/expedia/user", email, pw);
+                        try {
+                            login("http://www.kaca5.com/expedia/user", email, pw);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }.start();
             }
         });
     }
-    public void login(String url, String email, String pw){
+    public void login(String url, String email, String pw) throws JSONException {
         OkHttpClient client = new OkHttpClient();
 
-        RequestBody postBody = new FormBody.Builder()
-                .add("Email", email)
-                .add("Pw", pw)
-                .build();
-        Log.e("postbody content1 : ", ((FormBody) postBody).name(0) + " " + ((FormBody) postBody).value(0));
-        Log.e("postbody content2 : ", ((FormBody) postBody).name(1) + " " + ((FormBody) postBody).value(1));
+        JSONObject loginInput = new JSONObject();
+        loginInput.put("Email", email).put("Pw", pw);
+        RequestBody postBody = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                String.valueOf(loginInput));
+        Log.e("loginInput : ", loginInput.toString());
+        Log.e("postBody : ", postBody.toString());
+
         Request request = new Request.Builder().url(url).post(postBody).build();
         client.newCall(request).enqueue(loginCallback);
     }
@@ -89,6 +99,9 @@ public class LoginFragment extends Fragment {
                     }
                     else if(responseData.contains("503")){
                         Toast.makeText(getContext(), "존재하지 않는 회원입니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(responseData.contains("508")){
+                        Toast.makeText(getContext(), "비밀번호가 맞지 않습니다.", Toast.LENGTH_SHORT).show();
                     }
                     else if(responseData.contains("100")){
                         Toast.makeText(getContext(), "로그인에 성공하였습니다!", Toast.LENGTH_SHORT).show();
