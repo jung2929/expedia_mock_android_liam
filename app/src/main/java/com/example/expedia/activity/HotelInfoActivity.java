@@ -21,6 +21,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.tmall.ultraviewpager.UltraViewPager;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,14 +45,16 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
 
         Intent intent = getIntent();
 
-        ViewPager viewPager = findViewById(R.id.hotel_info_image_viewPager);
+        UltraViewPager viewPager = findViewById(R.id.hotel_info_image_viewPager);
+        viewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
         HotelInfoViewPagerAdapter viewPagerAdapter = new HotelInfoViewPagerAdapter(HotelInfoActivity.this);
-        viewPager.setAdapter(viewPagerAdapter);
 
         viewPagerAdapter.addItem(getResources().getDrawable(R.drawable.hotel_image0));
         viewPagerAdapter.addItem(getResources().getDrawable(R.drawable.hotel_image1));
         viewPagerAdapter.addItem(getResources().getDrawable(R.drawable.hotel_image2));
         viewPagerAdapter.addItem(getResources().getDrawable(R.drawable.hotel_image3));
+
+        viewPager.setAdapter(viewPagerAdapter);
 
         hotelInfoName = findViewById(R.id.hotel_info_name);
         hotelInfoDate = findViewById(R.id.hotel_info_date);
@@ -112,7 +115,10 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                //
+                Intent intent = new Intent(HotelInfoActivity.this, MapActivity.class);
+                intent.putExtra("hotelName", hotelInfoName.getText().toString());
+                intent.putExtra("hotelLoc", hotelInfoLoc.getText().toString());
+                startActivity(intent);
             }
         });
     }

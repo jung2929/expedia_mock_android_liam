@@ -95,6 +95,7 @@
                 </android.support.v7.widget.CardView>
             </android.support.constraint.ConstraintLayout>
                 <LinearLayout
+                    android:id="@+id/mainBeforeLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -158,7 +159,7 @@
                     </android.support.v7.widget.CardView>
                     <android.support.v7.widget.CardView
                         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/card_view_text2"
+                        android:id="@+id/mainAfterLogin"
                         android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -167,8 +168,7 @@
                         card_view:cardCornerRadius="5dp"
                         card_view:cardElevation="2dp"
                         card_view:contentPadding="10dp"
-                        card_view:cardBackgroundColor="#ffffff"
-                        android:visibility="gone">
+                        card_view:cardBackgroundColor="#ffffff">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

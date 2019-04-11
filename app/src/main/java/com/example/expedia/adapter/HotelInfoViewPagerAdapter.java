@@ -50,7 +50,7 @@ public class HotelInfoViewPagerAdapter extends PagerAdapter {
     }
     @Override
     public int getCount() {
-        return 4;
+        return mList.size();
     }
 
     @Override
