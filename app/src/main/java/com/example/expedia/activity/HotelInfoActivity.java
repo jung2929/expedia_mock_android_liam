@@ -3,11 +3,14 @@ package com.example.expedia.activity;
 import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,6 +18,8 @@ import android.widget.TextView;
 
 import com.example.expedia.adapter.HotelInfoViewPagerAdapter;
 import com.example.expedia.R;
+import com.example.expedia.adapter.RoomRecyclerAdapter;
+import com.example.expedia.entities.RoomRecyclerViewItem;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -24,6 +29,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.tmall.ultraviewpager.UltraViewPager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -36,6 +42,11 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
     private TextView hotelInfoPrice;
     private TextView hotelInfoPercentage;
     private TextView hotelInfoLoc;
+
+    private RecyclerView roomRecyclerView;
+    private LinearLayoutManager mLinearLayoutManager;
+    private ArrayList<RoomRecyclerViewItem> roomArrayList;
+    private RoomRecyclerAdapter roomRecyclerAdapter;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -55,6 +66,22 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
         viewPagerAdapter.addItem(getResources().getDrawable(R.drawable.hotel_image3));
 
         viewPager.setAdapter(viewPagerAdapter);
+
+        roomRecyclerView = findViewById(R.id.rvRoom);
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        roomRecyclerView.setLayoutManager(mLinearLayoutManager);
+
+        roomArrayList = new ArrayList<>();
+
+        ArrayList<Drawable> roomImage = new ArrayList<>();
+        roomImage.add(getResources().getDrawable(R.drawable.hotel_image0));
+        roomImage.add(getResources().getDrawable(R.drawable.hotel_image1));
+        roomImage.add(getResources().getDrawable(R.drawable.hotel_image3));
+        for(int i=0;i<3;i++){
+            roomArrayList.add(new RoomRecyclerViewItem(roomImage.get(i), "스탠다드 더블 룸"));
+        }
+        roomRecyclerAdapter = new RoomRecyclerAdapter(roomArrayList);
+        roomRecyclerView.setAdapter(roomRecyclerAdapter);
 
         hotelInfoName = findViewById(R.id.hotel_info_name);
         hotelInfoDate = findViewById(R.id.hotel_info_date);

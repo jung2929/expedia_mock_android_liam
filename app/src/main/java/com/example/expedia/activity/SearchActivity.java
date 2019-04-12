@@ -58,21 +58,26 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
         Intent intent = getIntent();
-        if(intent.getStringExtra("hotelDate") != null){
-            char[] hotelDateSet = intent.getStringExtra("hotelDate").toCharArray();
-
-            hotelSearchDateStartYear.setText(String.valueOf(hotelDateSet[0])+String.valueOf(hotelDateSet[1])
-                    +String.valueOf(hotelDateSet[2]) +String.valueOf(hotelDateSet[3]));
-            hotelSearchDateArriveYear.setText(String.valueOf(hotelDateSet[0])+String.valueOf(hotelDateSet[1])
-                    +String.valueOf(hotelDateSet[2]) +String.valueOf(hotelDateSet[3]));
-            hotelSearchDateStartMonth.setText(String.valueOf
-                    (Integer.parseInt(String.valueOf(hotelDateSet[5])+String.valueOf(hotelDateSet[6]))));
-            hotelSearchDateArriveMonth.setText(String.valueOf
-                    (Integer.parseInt(String.valueOf(hotelDateSet[18])+String.valueOf(hotelDateSet[19]))));
-            hotelSearchDateStartDay.setText(String.valueOf
-                    (Integer.parseInt(String.valueOf(hotelDateSet[8])+String.valueOf(hotelDateSet[9]))));
-            hotelSearchDateArriveDay.setText(String.valueOf
-                    (Integer.parseInt(String.valueOf(hotelDateSet[21])+String.valueOf(hotelDateSet[22]))));
+        try{
+            if(intent.getStringExtra("hotelDate") != null && intent.getStringExtra("hotelDate") != ("")){
+                char[] hotelDateSet = intent.getStringExtra("hotelDate").toCharArray();
+                if(hotelDateSet.length != 0){
+                    hotelSearchDateStartYear.setText(String.valueOf(hotelDateSet[0])+String.valueOf(hotelDateSet[1])
+                            +String.valueOf(hotelDateSet[2]) +String.valueOf(hotelDateSet[3]));
+                    hotelSearchDateArriveYear.setText(String.valueOf(hotelDateSet[0])+String.valueOf(hotelDateSet[1])
+                            +String.valueOf(hotelDateSet[2]) +String.valueOf(hotelDateSet[3]));
+                    hotelSearchDateStartMonth.setText(String.valueOf
+                            (Integer.parseInt(String.valueOf(hotelDateSet[5])+String.valueOf(hotelDateSet[6]))));
+                    hotelSearchDateArriveMonth.setText(String.valueOf
+                            (Integer.parseInt(String.valueOf(hotelDateSet[18])+String.valueOf(hotelDateSet[19]))));
+                    hotelSearchDateStartDay.setText(String.valueOf
+                            (Integer.parseInt(String.valueOf(hotelDateSet[8])+String.valueOf(hotelDateSet[9]))));
+                    hotelSearchDateArriveDay.setText(String.valueOf
+                            (Integer.parseInt(String.valueOf(hotelDateSet[21])+String.valueOf(hotelDateSet[22]))));
+                }
+            }
+        }catch(NullPointerException e){
+            e.printStackTrace();
         }
 
         if(intent.getStringExtra("hotelName") != null){
@@ -119,9 +124,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(SearchActivity.this, HotelSearchActivity.class);
-                intent.putExtra("hotelName", hotelSearchName.getText().toString());
-                //intent.putExtra("hotelDate", )
-                intent.putExtra("hotelPerson", hotelSearchPerson.getText().toString());
+                intent.putExtra("hotelLoc", hotelSearchName.getText().toString());
                 startActivity(intent);
             }
         });

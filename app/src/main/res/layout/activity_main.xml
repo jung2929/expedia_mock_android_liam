@@ -198,7 +198,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 card_view:cardCornerRadius="5dp"
                 card_view:cardElevation="2dp"
                 card_view:cardBackgroundColor="#ffffff">

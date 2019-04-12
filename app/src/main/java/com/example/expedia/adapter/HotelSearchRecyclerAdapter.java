@@ -24,7 +24,7 @@ public class HotelSearchRecyclerAdapter extends RecyclerView.Adapter<HotelSearch
         protected ImageView hotel_search_image;
         protected TextView hotel_search_percent;
         protected TextView hotel_search_name;
-        protected TextView hotel_search_loc_detail;
+        protected TextView hotel_search_loc;
         protected TextView hotel_search_rate;
         protected TextView hotel_search_price;
 
@@ -33,7 +33,7 @@ public class HotelSearchRecyclerAdapter extends RecyclerView.Adapter<HotelSearch
             this.hotel_search_image = view.findViewById(R.id.hotel_search_image);
             this.hotel_search_percent = view.findViewById(R.id.hotel_search_percent);
             this.hotel_search_name = view.findViewById(R.id.hotel_search_name);
-            this.hotel_search_loc_detail = view.findViewById(R.id.hotel_search_loc_detail);
+            this.hotel_search_loc = view.findViewById(R.id.hotel_search_loc_detail);
             this.hotel_search_rate = view.findViewById(R.id.hotel_search_rate);
             this.hotel_search_price = view.findViewById(R.id.hotel_search_price);
             final View mView = view;
@@ -54,11 +54,11 @@ public class HotelSearchRecyclerAdapter extends RecyclerView.Adapter<HotelSearch
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HotelSearchViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull final HotelSearchViewHolder viewHolder, int position) {
         viewHolder.hotel_search_image.setImageDrawable(mList.get(position).getHotel_search_image());
         viewHolder.hotel_search_percent.setText(mList.get(position).getHotel_search_percent());
         viewHolder.hotel_search_name.setText(mList.get(position).getHotel_search_name());
-        viewHolder.hotel_search_loc_detail.setText(mList.get(position).getHotel_search_loc_detail());
+        viewHolder.hotel_search_loc.setText(mList.get(position).getHotel_search_loc_detail());
         viewHolder.hotel_search_rate.setText(mList.get(position).getHotel_search_rate());
         viewHolder.hotel_search_price.setText(mList.get(position).getHotel_search_price());
 
@@ -67,6 +67,11 @@ public class HotelSearchRecyclerAdapter extends RecyclerView.Adapter<HotelSearch
             public void onClick(View view){
                 Context context = view.getContext();
                 Intent intent = new Intent(context, HotelInfoActivity.class);
+                intent.putExtra("hotelName", viewHolder.hotel_search_name.getText().toString());
+                intent.putExtra("hotelPercentage", viewHolder.hotel_search_percent.getText().toString());
+                intent.putExtra("hotelLoc", viewHolder.hotel_search_loc.getText().toString());
+                //intent.putExtra("hotelDate", viewHolder.hotel_search_date.getText().toString());
+                intent.putExtra("hotelPrice", viewHolder.hotel_search_price.getText().toString());
                 context.startActivity(intent);
             }
         });

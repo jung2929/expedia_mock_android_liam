@@ -292,6 +292,11 @@
                     android:textSize="18dp"
                     android:textColor="#000000"
                     android:text="호텔 제공 서비스 / 시설"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvRoom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
             </LinearLayout>
     </ScrollView>
     <android.support.constraint.ConstraintLayout
