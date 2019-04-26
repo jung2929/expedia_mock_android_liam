@@ -7,12 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.expedia.R;
-import com.example.expedia.activity.HotelInfoActivity;
 import com.example.expedia.activity.HotelSaleActivity;
 import com.example.expedia.entities.MainRecyclerViewItem;
 
@@ -42,7 +40,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     @Override
     public MainViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_view_main0, viewGroup, false);
+                .inflate(R.layout.cardview_main1, viewGroup, false);
 
         MainViewHolder viewHolder = new MainViewHolder(view);
 

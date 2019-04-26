@@ -5,12 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.expedia.R;
 import com.example.expedia.entities.RoomOptionRecyclerViewItem;
-import com.example.expedia.entities.RoomRecyclerViewItem;
 
 import java.util.ArrayList;
 
@@ -40,7 +38,7 @@ public class RoomOptionRecyclerAdapter extends RecyclerView.Adapter<RoomOptionRe
     @Override
     public RoomOptionViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_view_room_option, viewGroup, false);
+                .inflate(R.layout.cardview_room_option, viewGroup, false);
 
         RoomOptionViewHolder viewHolder = new RoomOptionViewHolder(view);
 

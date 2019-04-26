@@ -31,6 +31,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private TextView mapName;
     private TextView mapRate;
     private String hotelLoc;
+    private Double lat;
+    private Double lng;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -48,6 +50,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mapRate.setText("★★★★");
 
         hotelLoc = intent.getStringExtra("hotelLoc");
+        lat = intent.getDoubleExtra("hotelLat", 126.5);
+        lng = intent.getDoubleExtra("hotelLng", 37.5);
 
         FragmentManager fragmentManager = getFragmentManager();
         MapFragment mapfragment = (MapFragment) fragmentManager.findFragmentById(R.id.mapMap);
@@ -64,33 +68,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-        geocoder = new Geocoder(this);
 
-        List<Address> addressList = null;
-        try {
-            addressList = geocoder.getFromLocationName(hotelLoc, 3);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String[] splitLoc = addressList.get(0).toString().split(",");
-        String address = splitLoc[0].substring(splitLoc[0].indexOf("\"")+1, splitLoc[0].length()-2);
-        String lat = splitLoc[10].substring(splitLoc[10].indexOf("=")+1);
-        String lng = splitLoc[12].substring(splitLoc[12].indexOf("=")+1);
-
-        LatLng point = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+        LatLng point = new LatLng(lat, lng);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.title(mapName.getText().toString());
-        markerOptions.snippet(address);
         markerOptions.position(point);
 
         googleMap.addMarker(markerOptions);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 15));
 
-        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                //
-            }
-        });
     }
 }

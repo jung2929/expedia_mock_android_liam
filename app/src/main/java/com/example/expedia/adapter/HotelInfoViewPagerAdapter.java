@@ -32,7 +32,7 @@ public class HotelInfoViewPagerAdapter extends PagerAdapter {
         View view = null;
         if(mContext != null){
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.viewpager_item, container, false);
+            view = inflater.inflate(R.layout.viewpager_hotelimage_item, container, false);
             ImageView imageView = view.findViewById(R.id.viewPager_image);
 
             HotelInfoViewPagerItem viewPagerItem = mList.get(position);

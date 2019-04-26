@@ -48,6 +48,9 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
     private ArrayList<RoomRecyclerViewItem> roomArrayList;
     private RoomRecyclerAdapter roomRecyclerAdapter;
 
+    private String lat;
+    private String lng;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +100,9 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
         hotelInfoPrice.setText(intent.getStringExtra("hotelPrice") + "/1박");
         hotelInfoPercentage.setText(intent.getStringExtra("hotelPercentage"));
 
+        lat = intent.getStringExtra("hotelLat");
+        lng = intent.getStringExtra("hotelLng");
+
         FragmentManager fragmentManager = getFragmentManager();
         MapFragment mapfragment = (MapFragment) fragmentManager.findFragmentById(R.id.hotel_info_map);
         mapfragment.getMapAsync(this);
@@ -119,21 +125,11 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
         geocoder = new Geocoder(this);
 
         String hotelLoc = hotelInfoLoc.getText().toString();
-        List<Address> addressList = null;
-        try {
-            addressList = geocoder.getFromLocationName(hotelLoc, 3);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String[] splitLoc = addressList.get(0).toString().split(",");
-        String address = splitLoc[0].substring(splitLoc[0].indexOf("\"")+1, splitLoc[0].length()-2);
-        String lat = splitLoc[10].substring(splitLoc[10].indexOf("=")+1);
-        String lng = splitLoc[12].substring(splitLoc[12].indexOf("=")+1);
 
-        LatLng point = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+        final LatLng point = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.title(hotelInfoName.getText().toString());
-        markerOptions.snippet(address);
+        //markerOptions.snippet(address);
         markerOptions.position(point);
 
         googleMap.addMarker(markerOptions);
@@ -145,16 +141,18 @@ public class HotelInfoActivity extends AppCompatActivity implements OnMapReadyCa
                 Intent intent = new Intent(HotelInfoActivity.this, MapActivity.class);
                 intent.putExtra("hotelName", hotelInfoName.getText().toString());
                 intent.putExtra("hotelLoc", hotelInfoLoc.getText().toString());
+                intent.putExtra("hotelLat", point.latitude);
+                intent.putExtra("hotelLng", point.longitude);
                 startActivity(intent);
             }
         });
     }
-    @Override
+    /*@Override
     public void onBackPressed(){
         Intent intent = new Intent(HotelInfoActivity.this, SearchActivity.class) ;
         intent.putExtra("hotelName", hotelInfoName.getText().toString());
         intent.putExtra("hotelDate", hotelInfoDate.getText().toString());
         finish();
         startActivity(intent);
-    }
+    }*/
 }

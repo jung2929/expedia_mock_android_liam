@@ -111,7 +111,6 @@ public class SignUpFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             if (responseData.contains("500")) {
                 Toast.makeText(getContext(), "빈 칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
             } else if (responseData.contains("501")) {

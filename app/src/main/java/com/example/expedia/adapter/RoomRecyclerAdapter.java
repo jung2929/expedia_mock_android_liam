@@ -1,8 +1,6 @@
 package com.example.expedia.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.expedia.R;
-import com.example.expedia.activity.HotelInfoActivity;
-import com.example.expedia.entities.HotelSaleRecyclerViewItem;
 import com.example.expedia.entities.RoomOptionRecyclerViewItem;
 import com.example.expedia.entities.RoomRecyclerViewItem;
 
@@ -45,7 +41,7 @@ public class RoomRecyclerAdapter extends RecyclerView.Adapter<RoomRecyclerAdapte
     @Override
     public RoomViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_view_room, viewGroup, false);
+                .inflate(R.layout.cardview_room, viewGroup, false);
 
         RoomViewHolder viewHolder = new RoomViewHolder(view);
 

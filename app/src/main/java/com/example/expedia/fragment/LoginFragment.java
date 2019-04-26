@@ -132,6 +132,9 @@ public class LoginFragment extends Fragment {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+
+
+
                     if(responseData.contains("500")){
                         Toast.makeText(getContext(), "빈 칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     }

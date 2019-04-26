@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -12,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.expedia.R;
-import com.example.expedia.SearchPersonDialog;
+import com.example.expedia.dialog.SearchPersonDialog;
 
 public class SearchActivity extends AppCompatActivity {
 

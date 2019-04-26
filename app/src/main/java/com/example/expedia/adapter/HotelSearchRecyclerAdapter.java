@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.expedia.activity.HotelInfoActivity;
 import com.example.expedia.entities.HotelSearchRecyclerViewItem;
 import com.example.expedia.R;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 public class HotelSearchRecyclerAdapter extends RecyclerView.Adapter<HotelSearchRecyclerAdapter.HotelSearchViewHolder> {
 
     private ArrayList<HotelSearchRecyclerViewItem> mList;
+    private final Context context;
 
     public class HotelSearchViewHolder extends  RecyclerView.ViewHolder{
         protected ImageView hotel_search_image;
@@ -39,14 +41,15 @@ public class HotelSearchRecyclerAdapter extends RecyclerView.Adapter<HotelSearch
             final View mView = view;
         }
     }
-    public HotelSearchRecyclerAdapter(ArrayList<HotelSearchRecyclerViewItem> list){
+    public HotelSearchRecyclerAdapter(Context context, ArrayList<HotelSearchRecyclerViewItem> list){
         this.mList = list;
+        this.context = context;
     }
     @NonNull
     @Override
     public HotelSearchViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_view_hotel1, viewGroup, false);
+                .inflate(R.layout.cardview_hotel1, viewGroup, false);
 
         HotelSearchViewHolder viewHolder = new HotelSearchViewHolder(view);
 
@@ -54,8 +57,9 @@ public class HotelSearchRecyclerAdapter extends RecyclerView.Adapter<HotelSearch
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final HotelSearchViewHolder viewHolder, int position) {
-        viewHolder.hotel_search_image.setImageDrawable(mList.get(position).getHotel_search_image());
+    public void onBindViewHolder(@NonNull final HotelSearchViewHolder viewHolder, final int position) {
+        //viewHolder.hotel_search_image.setImageDrawable(mList.get(position).getHotel_search_image());
+        Glide.with(context).asDrawable().load(mList.get(position).getHotel_search_image()).into(viewHolder.hotel_search_image);
         viewHolder.hotel_search_percent.setText(mList.get(position).getHotel_search_percent());
         viewHolder.hotel_search_name.setText(mList.get(position).getHotel_search_name());
         viewHolder.hotel_search_loc.setText(mList.get(position).getHotel_search_loc_detail());
@@ -72,6 +76,8 @@ public class HotelSearchRecyclerAdapter extends RecyclerView.Adapter<HotelSearch
                 intent.putExtra("hotelLoc", viewHolder.hotel_search_loc.getText().toString());
                 //intent.putExtra("hotelDate", viewHolder.hotel_search_date.getText().toString());
                 intent.putExtra("hotelPrice", viewHolder.hotel_search_price.getText().toString());
+                intent.putExtra("hotelLat", mList.get(position).getHotel_search_lat());
+                intent.putExtra("hotelLng", mList.get(position).getHotel_search_lng());
                 context.startActivity(intent);
             }
         });

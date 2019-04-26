@@ -29,9 +29,19 @@
             android:textSize="18dp"
             android:textColor="#0000AA"/>
     </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/hotel_search_recyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <fragment
+            android:id="@+id/hotel_search_map"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            class = "com.google.android.gms.maps.MapFragment"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/hotel_search_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
 </LinearLayout>
