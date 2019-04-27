@@ -6,11 +6,14 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import com.example.expedia.adapter.HotelSearchRecyclerAdapter;
@@ -48,6 +51,7 @@ public class HotelSearchActivity extends AppCompatActivity {
     private RecyclerView hotelRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private ImageButton backButton;
+    private FrameLayout mFrameLayout;
 
     private String hotelLoc;
     private Context context;
@@ -61,6 +65,8 @@ public class HotelSearchActivity extends AppCompatActivity {
         hotelLoc = getIntent().getStringExtra("hotelLoc");
 
         hotelRecyclerView = findViewById(R.id.hotel_search_recyclerView);
+        mFrameLayout = findViewById(R.id.content);
+
         mLinearLayoutManager = new LinearLayoutManager(this);
         hotelRecyclerView.setLayoutManager(mLinearLayoutManager);
 

@@ -29,19 +29,49 @@
             android:textSize="18dp"
             android:textColor="#0000AA"/>
     </LinearLayout>
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:orientation="vertical"
+            android:fitsSystemWindows="true">
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                <fragment
+                    android:id="@+id/hotel_search_map"
+                    app:layout_collapseMode="parallax"
+                    android:layout_height="400dp"
+                    android:layout_width="match_parent"
+                    class = "com.google.android.gms.maps.MapFragment"/>
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/hotel_search_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+        </FrameLayout>
+    </android.support.design.widget.CoordinatorLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <fragment
-            android:id="@+id/hotel_search_map"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            class = "com.google.android.gms.maps.MapFragment"/>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/hotel_search_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
+
+
     </LinearLayout>
 </LinearLayout>
